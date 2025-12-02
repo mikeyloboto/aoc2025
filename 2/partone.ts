@@ -16,10 +16,6 @@ fs.readFile("./testinput", "utf8", (err, data) => {
         const len = procStr.length;
         if (len % 2 !== 0) continue;
 
-        // console.log(
-        //   `${procStr} - (${procStr.substring(0, len / 2)} ${procStr.substring(len / 2)})`,
-        // );
-
         if (procStr.substring(0, len / 2) === procStr.substring(len / 2)) {
           console.log(`Invalid number: ${procStr}`);
           totalSum += i;

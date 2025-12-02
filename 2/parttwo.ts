@@ -32,7 +32,7 @@ fs.readFile("./input", "utf8", (err, data) => {
         const procStr = `${i}`;
         if (validate(procStr)) {
           totalSum += i;
-          console.log({ match: procStr, runningSum: totalSum });
+          //console.log({ match: procStr, runningSum: totalSum });
         }
       }
     }
