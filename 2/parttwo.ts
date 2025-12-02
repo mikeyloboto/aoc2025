@@ -27,6 +27,7 @@ fs.readFile("./input", "utf8", (err, data) => {
 
     let totalSum = 0;
 
+    console.time("proc");
     for (const ran of procRanges) {
       for (let i = ran[0]; i <= ran[1]; i++) {
         const procStr = `${i}`;
@@ -36,6 +37,7 @@ fs.readFile("./input", "utf8", (err, data) => {
         }
       }
     }
+    console.timeEnd("proc");
 
     console.log(`Total  sum: ${totalSum}`);
   }
