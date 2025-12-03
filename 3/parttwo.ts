@@ -18,6 +18,8 @@ fs.readFile("./input", "utf8", (err, data) => {
             break;
           }
         }
+
+        // if nothing is removed, then all batteries are in descending order, just yeet the last one
         if (!removed) {
           batteries.splice(batteries.length - 1, 1);
         }
