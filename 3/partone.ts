@@ -5,6 +5,9 @@ fs.readFile("./input", "utf8", (err, data) => {
     const cleanData = data.trim().split("\n");
 
     let totalJoltage = 0;
+
+    console.time("proc");
+
     for (const bank of cleanData) {
       const batteries = bank.split("").map(Number);
       //find max val and index
@@ -36,6 +39,7 @@ fs.readFile("./input", "utf8", (err, data) => {
       totalJoltage += +ordered;
     }
 
+    console.timeEnd("proc");
     console.log(`Total Joltage: ${totalJoltage}`);
   }
 });

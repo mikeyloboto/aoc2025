@@ -5,6 +5,7 @@ fs.readFile("./input", "utf8", (err, data) => {
     const cleanData = data.trim().split("\n");
 
     let totalJoltage = 0;
+    console.time("proc");
     for (const bank of cleanData) {
       const batteries = bank.split("").map(Number);
 
@@ -28,6 +29,7 @@ fs.readFile("./input", "utf8", (err, data) => {
       const rowJoltage = +batteries.map(String).join("");
       totalJoltage += rowJoltage;
     }
+    console.timeEnd("proc");
 
     console.log(`Total Joltage: ${totalJoltage.toString()}`);
   }
