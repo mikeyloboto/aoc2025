@@ -1,2 +1,4 @@
 **/input
 **/testinput
+**/node_modules
+**/package-lock.json
