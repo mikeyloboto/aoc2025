@@ -23,6 +23,8 @@ fs.readFile("./input", "utf8", (err, data) => {
       }
     }
 
+    console.time("proc");
+
     while (true) {
       for (let i = 0; i < x; i++) {
         refRow = [];
@@ -60,6 +62,8 @@ fs.readFile("./input", "utf8", (err, data) => {
       );
       reformedMap = [];
     }
+    console.timeEnd("proc");
+    // 259.03ms (This is horrible)
 
     // console.log(checkMask);
     // console.log(cleanData.map((r) => r.join("")).join("\n"));

@@ -23,6 +23,7 @@ fs.readFile("./input", "utf8", (err, data) => {
 
     let availableRolls = 0;
 
+    console.time("proc");
     for (let i = 0; i < x; i++) {
       refRow = [];
       for (let j = 0; j < y; j++) {
@@ -47,6 +48,8 @@ fs.readFile("./input", "utf8", (err, data) => {
       }
       reformedMap.push(refRow);
     }
+    console.timeEnd("proc");
+    // 16.561ms
 
     // console.log(checkMask);
 
