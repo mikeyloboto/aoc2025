@@ -1,7 +1,7 @@
 const fs = require("fs");
 const imgjs = require("image-js");
 
-toImage = (map, iter) => {
+toImage = async (map, iter) => {
   const img = new imgjs.Image(map.length, map[0].length);
 
   let formattedName = `0000000000${iter}`;
@@ -13,7 +13,10 @@ toImage = (map, iter) => {
   }
 
   formattedName = formattedName.substring(formattedName.length - 4);
-  imgjs.write(`./output/${formattedName}.png`, img);
+  imgjs.write(
+    `./output/${formattedName}.png`,
+    img.resize({ xFactor: 8, yFactor: 8, interpolationType: "nearest" }),
+  );
 };
 
 fs.readFile("./input", "utf8", (err, data) => {
