@@ -7,11 +7,8 @@ fs.readFile("./input", "utf8", (err, data) => {
     .split("\n")
     .map((row) => row.trim())
     .map((row) => row.split(/\s+/g));
-  console.log(cleanData);
 
   const opRow = cleanData.splice(cleanData.length - 1)[0];
-
-  console.log(cleanData, opRow);
 
   const results = [];
 
