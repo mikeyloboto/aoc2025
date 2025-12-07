@@ -48,6 +48,7 @@ fs.readFile("./input", "utf8", (err, data) => {
               count: beam.count,
             });
           }
+          // right
           const rbeam = newBeams.find((b) => b.beam === beam.beam - 1);
           if (rbeam) {
             rbeam.count += beam.count;
