@@ -8,7 +8,7 @@ calcDistance = (n1, n2) => {
   );
 };
 
-fs.readFile("./input", "utf8", (err, data) => {
+fs.readFile("./testinput", "utf8", (err, data) => {
   if (err) return;
 
   const cleanData = data
@@ -17,7 +17,7 @@ fs.readFile("./input", "utf8", (err, data) => {
     .map((row, i) => ({ coord: row.split(",").map(Number), id: i }));
 
   let distances = [];
-  const nets = new Array(1000).fill([]).map((e, i) => [i]);
+  const nets = new Array(cleanData.length).fill([]).map((e, i) => [i]);
 
   console.log(cleanData.length);
 
@@ -42,16 +42,9 @@ fs.readFile("./input", "utf8", (err, data) => {
     nets.splice(nets.indexOf(jnet), 1);
 
     if (nets.length === 1) {
-      console.log("last one");
-      console.log(d);
-      const res = cleanData[d.i].coord[0] * cleanData[d.j].coord[0];
-      console.log(res);
+      console.log("last one", d);
+      console.log(cleanData[d.i].coord[0] * cleanData[d.j].coord[0]);
       break;
     }
   }
-  const topThree = nets.sort((a, b) => b.length - a.length).splice(0, 3);
-  console.log(
-    topThree,
-    topThree.reduce((a, c) => a * c.length, 1),
-  );
 });
