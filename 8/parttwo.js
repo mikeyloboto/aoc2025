@@ -8,7 +8,7 @@ calcDistance = (n1, n2) => {
   );
 };
 
-fs.readFile("./testinput", "utf8", (err, data) => {
+fs.readFile("./input", "utf8", (err, data) => {
   if (err) return;
 
   const cleanData = data
@@ -21,6 +21,7 @@ fs.readFile("./testinput", "utf8", (err, data) => {
 
   console.log(cleanData.length);
 
+  console.time("distances");
   // pregenerate distances between all pairs
   for (let i = 0; i < cleanData.length - 1; i++) {
     for (let j = i + 1; j < cleanData.length; j++) {
@@ -30,6 +31,10 @@ fs.readFile("./testinput", "utf8", (err, data) => {
   }
   distances = distances.sort((a, b) => a.dist - b.dist);
 
+  console.timeEnd("distances");
+  // 654.855ms
+
+  console.time("connections");
   for (const d of distances) {
     if (nets.find((n) => n.includes(d.i) && n.includes(d.j))) {
       continue;
@@ -47,4 +52,6 @@ fs.readFile("./testinput", "utf8", (err, data) => {
       break;
     }
   }
+  console.timeEnd("connections");
+  // 49.865ms
 });
