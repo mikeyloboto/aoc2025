@@ -3,8 +3,8 @@ const fs = require("fs");
 calcDistance = (n1, n2) => {
   return Math.sqrt(
     Math.pow(n1.coord[0] - n2.coord[0], 2) +
-    Math.pow(n1.coord[1] - n2.coord[1], 2) +
-    Math.pow(n1.coord[2] - n2.coord[2], 2),
+      Math.pow(n1.coord[1] - n2.coord[1], 2) +
+      Math.pow(n1.coord[2] - n2.coord[2], 2),
   );
 };
 
