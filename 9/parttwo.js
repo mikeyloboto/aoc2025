@@ -38,13 +38,14 @@ fs.readFile("./input", "utf8", (err, data) => {
 
   sizes = sizes.sort((a, b) => b.size - a.size);
   console.timeEnd("calc sizes");
+  // 99.49ms
 
   console.time("search");
   for (const ch of sizes) {
     let found = true;
     for (let i = 0; i < cleanData.length; i++) {
       const j = i === cleanData.length - 1 ? 0 : i + 1;
-      // check if dot is within range
+      // check if dot is within rectangle
       if (
         cleanData[i][0] > ch.range[0] &&
         cleanData[i][0] < ch.range[1] &&
@@ -55,6 +56,7 @@ fs.readFile("./input", "utf8", (err, data) => {
         break;
       }
       // check if line is passing though range
+      // x coord
       if (
         Math.min(cleanData[i][0], cleanData[j][0]) <= ch.range[0] &&
         Math.max(cleanData[i][0], cleanData[j][0]) >= ch.range[1] &&
@@ -66,6 +68,7 @@ fs.readFile("./input", "utf8", (err, data) => {
         found = false;
         break;
       }
+      // y coord
       if (
         Math.min(cleanData[i][1], cleanData[j][1]) <= ch.range[2] &&
         Math.max(cleanData[i][1], cleanData[j][1]) >= ch.range[3] &&
@@ -87,4 +90,5 @@ fs.readFile("./input", "utf8", (err, data) => {
     }
   }
   console.timeEnd("search");
+  // 983.87ms
 });
