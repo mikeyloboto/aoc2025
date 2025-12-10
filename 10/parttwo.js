@@ -10,6 +10,15 @@ procButton = (state, buttons) => {
   return res;
 };
 
+oobCheck = (state, target) => {
+  for (let s = 0; s < state.length; s++) {
+    if (state[s] > target[s]) {
+      return true;
+    }
+  }
+  return false;
+};
+
 scaleButton = (buttons, scale) => {
   return buttons.map((b) => b * scale);
 };
@@ -42,7 +51,11 @@ recProc = (options, previous, target) => {
     return null;
   } else {
     for (const op of options[0]) {
-      const valOp = recProc(options.slice(1), procButton(previous, op), target);
+      const curState = procButton(previous, op);
+      if (oobCheck(curState, target)) {
+        continue;
+      }
+      const valOp = recProc(options.slice(1), curState, target);
       if (valOp) {
         candidates.push(
           ...valOp.map((v) => {
@@ -102,7 +115,7 @@ fs.readFile("./input", "utf8", (err, data) => {
 
   let counts = [];
   for (const [i, mac] of cleanData.entries()) {
-    console.log("Processing", i);
+    console.log("Processing", i, mac);
 
     // boolmaps no longer needed
     // come up with new logic...
@@ -114,7 +127,7 @@ fs.readFile("./input", "utf8", (err, data) => {
 
     for (const btn of mac.sbuttons) {
       const opt = [];
-      for (let p = 0; p <= maxj; p++) {
+      for (let p = maxj; p >= 0; p--) {
         opt.push(scaleButton(btn, p));
       }
       buttonOptions.push(opt);
@@ -129,6 +142,7 @@ fs.readFile("./input", "utf8", (err, data) => {
       .map((r) => r.reduce((a, c) => a + c, 0))
       .sort((a, b) => a - b);
     counts.push(reducedCandidates[0]);
+    console.log("best so far: ", counts);
     // ok, at this point we have all possible changes button presses would introduce, so we can pick 1 from each row, and see if we get desired joltage
     // but at this point the scaling is fucking horrific: (max(joltage) ^ n of buttons...)
   }
