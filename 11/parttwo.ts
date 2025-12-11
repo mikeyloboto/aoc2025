@@ -47,7 +47,10 @@ function procSolution(data: string[]) {
   });
 
   const start = nodeMap[START_NODE]!;
+  console.time('proc');
   const finCount = recMap(start, 0, []);
+  console.timeEnd('proc');
+  // 3.358ms
   console.log(
     finCount.filter((c) => meetsReq(c.path)).reduce((a, c) => a + c.count, 0)
   );
