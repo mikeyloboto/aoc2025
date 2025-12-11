@@ -67,8 +67,9 @@ function procSolution(data: string[]) {
   //  VISIT_NODE.reduce((a, vn) => a && ch.includes(vn), true)
   //);
   //console.log(filteredChains.length);
-  console.log({ finCount });
-  console.log({ pathCount });
+  console.log(
+    finCount.filter((c) => meetsReq(c.path)).reduce((a, c) => a + c.count, 0)
+  );
   //console.log({ paths });
 }
 
@@ -89,23 +90,26 @@ function recMap(
   node.matconn.forEach((conn) => {
     const paths = recMap(conn, depth + 1, [...path, node.serv]);
     // console.log({ paths });
+
     paths.forEach((pa) => {
       const canonicalName = pa.path.join('');
       const existing = node.potPaths.find(
         (pp) => pp.path.join('') === canonicalName
       );
+
+      // console.log(node.serv, canonicalName, existing);
       if (existing) {
-        console.log({ existing, node: node.serv, canonicalName });
         existing.count += pa.count;
       } else {
-        console.log({ existing, node: node.serv, canonicalName });
-        node.potPaths.push(pa);
+        node.potPaths.push(JSON.parse(JSON.stringify(pa)));
       }
+      // console.log(`${node.serv} merge`, node.potPaths);
     });
   });
   node.traversed = true;
   if (VISIT_NODE.includes(node.serv))
     node.potPaths.forEach((pp) => pp.path.push(node.serv));
+  // console.log(node.potPaths, node.serv);
   return node.potPaths;
 }
 
@@ -113,7 +117,7 @@ function meetsReq(path: string[]) {
   return VISIT_NODE.reduce((a, vn) => a && path.includes(vn), true);
 }
 
-fs.readFile('./testinput2', 'utf8', (err, data) => {
+fs.readFile('./input', 'utf8', (err, data) => {
   if (!err) {
     procSolution(data.trim().split(/\n/g));
   }
