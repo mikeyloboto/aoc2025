@@ -40,16 +40,19 @@ function procSolution(data: string) {
     pr.area = pr.shape.join('').matchAll(/#/g).toArray().length;
   });
 
-  console.log(presents);
-  console.log(requirements);
+  // console.log(presents);
+  // console.log(requirements);
 
   let fitting = 0;
+
+  // Everything before is a preparation while overthinking
+
+  // And this is the actual solution
   requirements.forEach((req) => {
     let occArea = 0;
     for (let i = 0; i < req.req.length; i++) {
       occArea += req.req[i]! * presents[i]!.area!;
     }
-    console.log(req, occArea);
     if (occArea <= req.area!) {
       fitting++;
     }
